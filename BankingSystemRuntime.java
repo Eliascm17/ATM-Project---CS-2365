@@ -3,7 +3,7 @@
  * Professor Shin
  * Fall 2018
  * 
- * Created by John Goodrich ©2018
+ * Created by John Goodrich ï¿½2018
  */
 package project;
 
@@ -44,21 +44,44 @@ public class BankingSystemRuntime {
 		Customer customer2 = new Customer("Jane","Doe",1234);
 		Customer customer3 = new Customer("Michael", "Bay", 4321);
 		
-		Scanner input = new Scanner(System.in);
+		//Scanner input = new Scanner(System.in);
 		
+		menu();
+			
+	/*	
 		int pin = input.nextInt();
 		
-		if(checkpin(customer1, customer.getpin() == true) {;
+		if(checkpin(customer1, customer.getpin()) == true) {
 		
 			menu();
 		
-		}
+		}*/
 
 	}
 	
-	// SWITCH MENU
+	// SWITCH MENU - for menu options
 	
 	public void menu() {
+		
+		Scanner input = new Scanner(System.in);
+		
+		//prompt user for account number
+		System.out.println("Please enter your Account Number: \n");
+		int aNum = input.nextInt();
+		
+		//if user enters invalid account then continue to prompt unitl correct or terminates
+		while(!(aNum.exists())) {
+			System.out.println("Invalid Account Number \nPlease try again, or type 6 to Cancel \n");
+			aNum = input.nextInt();
+			if(aNum == 6)
+				menu();
+		}
+		
+		//prompt user for pin
+		System.out.println("\n Enter your PIN: \n");
+		int userPin = input.nextInt();
+		
+		System.out.println("Please enter your Account Number: \n");
 		
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
@@ -67,7 +90,7 @@ public class BankingSystemRuntime {
 			
 			// DEPOSIT
 			
-			case 0:
+			case 1:
 			
 				System.out.println("Deposit");
 				deposit();
@@ -75,7 +98,7 @@ public class BankingSystemRuntime {
 				
 			// WITHDRAW
 			
-			case 1:
+			case 2:
 			
 				System.out.println("Withdraw");
 				withdraw();
@@ -83,7 +106,7 @@ public class BankingSystemRuntime {
 			
 			// VIEW BALANCE	
 				
-			case 2:
+			case 3:
 			
 				System.out.println("View Balance");
 				viewBalance();
@@ -134,14 +157,9 @@ public class BankingSystemRuntime {
 	
 	public boolean checkPin(Account a) {
 		
-		if(a.getPin() == system.getPin()) {
-			
+		if(a.getPin() == system.getPin())	
 			return true;
-			
-		}
-		
 		return false;
-		
 	}
 	
 	// CHECK ACCOUNT
