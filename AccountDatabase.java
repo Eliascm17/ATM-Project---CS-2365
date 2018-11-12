@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class AccountDatabase extends ArrayList<Account> {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	AccountDatabase() {
