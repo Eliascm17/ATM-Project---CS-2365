@@ -72,6 +72,8 @@ public class BankStaff extends SystemInterface {
     
     // CREATES NEW ACCOUNT
     public void createAccount() {
+    	
+    	int account_number = 0;
         
         Scanner input = new Scanner(System.in);
         
@@ -82,11 +84,7 @@ public class BankStaff extends SystemInterface {
         System.out.println("Enter Social Security #");
         int ssn = input.nextInt();
         
-        int account_number = accountNumberGenerator();
-        System.out.println("System generated account # : " + account_number);
-        
-        
-        System.out.println("Checking or savings?\n0 for checking\n1 for savings");
+        System.out.println("Checking or Savings?\\n0 for Checking\\n1 for Savings");
         int choice = input.nextInt();
         
         // CHOICE FOR CREATING CHECKING ACCOUNT or SAVINGS ACCOUNT
@@ -94,30 +92,38 @@ public class BankStaff extends SystemInterface {
                 
                 // CREATE CHECKING ACCOUNT
             case 0:
-                
+            	
+            	account_number = accountNumberGenerator(1);
                 CheckingAccount checking_account = new CheckingAccount(account_number,pin,ssn,0.0);
                 addAccount(checking_account);
                 break;
+            	
                 
                 // CREATE SAVINGS ACCOUNT
             case 1:
-                
-                SavingsAccount savings_account = new SavingsAccount(account_number,pin,ssn,0.0);
+            	account_number = accountNumberGenerator(0);
+            	SavingsAccount savings_account = new SavingsAccount(account_number,pin,ssn,0.0);
                 addAccount(savings_account);
                 break;
                 
         }
+        
+        System.out.println("System generated account # : " + account_number);
+        
         input.close();
     }
     
     // GENERATES ACCOUNT NUMBER
-    public int accountNumberGenerator() {
+    public int accountNumberGenerator(int choice) {
         
         // CREATE RANDOM NUMBER
         Random random = new Random();
         int[] account_number_arr = new int[5];
         
-        int i = 0;
+        //sets choice as 1 or 0 for index 0 so that it is either a savings or checking acct.
+        account_number_arr[0] = choice;
+        
+        int i = 1;
         
         while(i < 5) {
             
