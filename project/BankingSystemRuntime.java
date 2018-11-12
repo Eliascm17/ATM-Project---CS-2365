@@ -1,4 +1,4 @@
-* This is a program for the COSC 2365 Object Oriented Programming Course
+/* This is a program for the COSC 2365 Object Oriented Programming Course
 * Professor Shin
 * Fall 2018
 *
