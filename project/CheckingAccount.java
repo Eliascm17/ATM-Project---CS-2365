@@ -11,3 +11,5 @@ class CheckingAccount extends Account{
         balance = bal;
         //type = "checking";
     }
+    
+}
