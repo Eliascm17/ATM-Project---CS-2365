@@ -1,11 +1,12 @@
-/* This is a program for the COSC 2365 Object Oriented Programming Course
-* Professor Shin
-* Fall 2018
-*
-* Created by John Goodrich �2018
-*/
+/**
+ * This is a program for the CS 2365 Object Oriented Programming Course
+ * Professor Shin
+ * Fall 2018
+ *
+ */
 package project;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,69 +45,74 @@ public class BankingSystemRuntime {
         // timer.schedult(task);
         //AccountDatabase database = new AccountDatabase();
         boolean flag = true;
-        
+        int account_number = 0;
+        int enter_count = 3, pin_count = 3;        //counter for attempts
         
         while(flag == true) {
             
             Scanner input = new Scanner(System.in);
             
             System.out.println("Enter account number : ");
-            int account_number = input.nextInt();
-            
-            int enter_count = 2;        //counter for attempts
-            
-            //while the account number entered is invalid
-            while((checkInput(account_number,5) == false) || checkAn(account_number) == false) {
-                
-                System.out.println("\nINVALID Account number, please re-enter");
-                System.out.println("You have " + enter_count + " tries left\n");
+            try {
                 account_number = input.nextInt();
                 
-                enter_count--;        //decrement attempts left
-                
-                if(enter_count == 0) {
+                //while the account number entered is invalid
+                while((checkInput(account_number,5) == false) || checkAn(account_number) == false) {
                     
-                    System.out.println("Max number of attempts exceeded, system shutting down for security purposes.");
-                    System.exit(0);
+                    System.out.println("\nINVALID Account number. Please try again.");
+                    enter_count = attemptsLeft(enter_count);
+                    
+                    account_number = input.nextInt();
+                }
+                
+                //if bank staff account entered
+                if(account_number == 11111) {
+                    System.out.println("Bank Staff");
+                    
+                    BankStaff bs = new BankStaff();
+                    //go to bank staff menu
+                    bs.bankStaffMenu();
+                }
+                
+                
+                // CUSTOMER ENTERS PIN
+                // Needs a separate method
+                System.out.println("\nEnter Pin: ");
+                
+                int pin = input.nextInt();
+                if(checkInput(pin,4) == true) {
+                    
+                    //validate the pin entered
+                    for(Account a : database) {
+                        
+                        if(pin == a.getPin() && account_number == a.getAccount_number()) {
+                            
+                            System.out.println("\nPin validated");
+                            Customer customer = new Customer(a);
+                            //customer.setSystemAccount(a);
+                            //customer.setCustomerAccount(a);
+                            
+                            //go to customer menu
+                            customer.customerMenu();
+                        }
+                        
+                        else    {
+                            System.out.println("Invalid pin. Please try again.");
+                            pin_count = attemptsLeft(pin_count);
+                        }
+                        continue;
+                        
+                    }
+                }
+                else {
+                    System.out.println("Invalid pin. Please try again.");
+                    pin_count = attemptsLeft(pin_count);
                 }
             }
-            
-            //if bank staff account entered
-            if(account_number == 11111) {
-                System.out.println("Bank Staff");
+            catch(InputMismatchException n) {
+                System.out.println("\nERROR. Only numbers allowed. Please try again.\n");
+                enter_count = attemptsLeft(enter_count);
                 
-                BankStaff bs = new BankStaff();
-                //go to bank staff menu
-                bs.bankStaffMenu();
-            }
-            
-            // CUSTOMER ENTERS PIN
-            // Needs a separate method
-            System.out.println("\nEnter Pin: ");
-            int pin = input.nextInt();
-            
-            if(checkInput(pin,4) == true) {
-                
-                //validate the pin entered
-                for(Account a : database) {
-                    
-                    if(pin == a.getPin() && account_number == a.getAccount_number()) {
-                        
-                        System.out.println("Pin validated");
-                        Customer customer = new Customer(a);
-                        //customer.setSystemAccount(a);
-                        //customer.setCustomerAccount(a);
-                        
-                        //go to customer menu
-                        customer.customerMenu();
-                    }
-                    
-                    else    {
-                        System.out.println("Invalid pin");        //GIVE 3 TRIES
-                    }
-                    continue;
-                    
-                }
             }
             
             /*System.out.println("Shut down ATM? Y/N");
@@ -123,6 +129,18 @@ public class BankingSystemRuntime {
              
              }*/
         }
+        
+    }
+    
+    public static int attemptsLeft(int counter) {
+        counter--;        //decrement attempts left
+        System.out.println("Attempts remaining: " + counter + "\n");
+        
+        if(counter == 0) {
+            System.out.println("Max number of attempts exceeded, system shutting down for security purposes.");
+            System.exit(0);
+        }
+        return counter;
     }
     
     public static boolean checkAn(int aNum) {
@@ -137,6 +155,7 @@ public class BankingSystemRuntime {
         //if not, return false
         return false;
     }
+    
     // CHECK INPUT LENGTHS - checks the required lengths of inputs
     
     public static boolean checkInput(int input, int length) {
