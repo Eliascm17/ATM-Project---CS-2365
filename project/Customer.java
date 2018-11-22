@@ -1,6 +1,7 @@
 package project;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Customer extends SystemInterface {
@@ -35,98 +36,100 @@ public class Customer extends SystemInterface {
         
         // SWITCH MENU
         while(flag == true) {
+            int choice = -1;
             
             System.out.printf("\nMAIN MENU\n\n0) Deposit \n1) Withdraw \n2) View Current balance (query account)"
                               + "\n3) Transfer Funds \n4) View last deposit \n5) Cancel \n");
             
             Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
-            System.out.print("\n");
-            
-            switch(choice) {
-                    
-                    // DEPOSIT
-                    
-                case 0:
-                    
-                    last_deposit = 0;
-                    deposit(customer_account);
-                    break;
-                    
-                    // WITHDRAW
-                    
-                case 1:
-                    
-                    withdraw();
-                    break;
-                    
-                    // VIEW BALANCE
-                    
-                case 2:
-                    
-                    viewBalance(customer_account);
-                    break;
-                    
-                    // TRANSFER FUNDS
-                    
-                case 3:
-                    
-                    transfer();
-                    break;
-                    
-                    // VIEW LAST DEPOSIT
-                    
-                case 4:
-                    
-                    viewLastDeposit();
-                    break;
-                    
-                    // CANCEL
-                    
-                case 5:
-                    
-                    System.out.println("Thank you for banking with us!");
-                    flag = false; // Potential error
-                    break;
-                    
+            try {
+                choice = input.nextInt();
+                
+                if(choice > 5 || choice < 0)
+                    throw new InputMismatchException();
+                
+                System.out.print("\n");
+                
+                switch(choice) {
+                        
+                        // DEPOSIT
+                        
+                    case 0:
+                        
+                        last_deposit = 0;
+                        deposit(customer_account);
+                        break;
+                        
+                        // WITHDRAW
+                        
+                    case 1:
+                        
+                        withdraw();
+                        break;
+                        
+                        // VIEW BALANCE
+                        
+                    case 2:
+                        
+                        viewBalance(customer_account);
+                        break;
+                        
+                        // TRANSFER FUNDS
+                        
+                    case 3:
+                        
+                        transfer();
+                        break;
+                        
+                        // VIEW LAST DEPOSIT
+                        
+                    case 4:
+                        
+                        viewLastDeposit();
+                        break;
+                        
+                        // CANCEL
+                        
+                    case 5:
+                        
+                        System.out.println("Thank you for banking with us!");
+                        flag = false; // Potential error
+                        break;
+                        
+                }
+                
+                // PROMPTS USER FOR CONTINUING PROGRAM
+                
+                Scanner cont = new Scanner(System.in);
+                System.out.println("\nContinue banking? Y/N");
+                String response = cont.nextLine();
+                response = response.toUpperCase();
+                
+                while(!(response.equals("Y")) && !(response.equals("N"))){
+                    System.out.println("\nPlease enter Y or N\n");
+                    response = cont.next();
+                    response = response.toUpperCase();
+                }
+                if(response.equals("N")) {
+                    System.out.println("\nThank you for banking with us!");
+                    flag = false;
+                    System.exit(0);
+                }
+                else if(response.equals("Y")) {
+                    customerMenu();
+                }
+                
+            }
+            catch(InputMismatchException n) {
+                System.out.println("\nERROR. Please enter a number 0 - 5");
+                
             }
             
-            // PROMPTS USER FOR CONTINUING PROGRAM
-            
-            Scanner cont = new Scanner(System.in);
-            System.out.println("\nContinue banking? Y/N");
-            String response = cont.nextLine();
-            response = response.toUpperCase();
-            
-            //insert CATCH FOR ANYTHING OTHER THAN Y OR N
-            if(response.equals("N") ) {
-                System.out.println("\nThank you for banking with us!");
-                //flag = false;
-                System.exit(0);
-            }
-            if(response.equals("Y")) {
-                customerMenu();
-            }
         }
-        
-        
     }
     
-    /*    public void deposit() {
-     
-     Scanner input = new Scanner(System.in);
-     
-     System.out.println("Enter deposit amount : ");
-     double deposit_amount = input.nextDouble();
-     
-     double new_balance = (customer_account.getBalance() + deposit_amount);
-     
-     customer_account.setBalance(new_balance);
-     last_deposit = deposit_amount;
-     
-     viewBalance();
-     
-     }
+    
+    /*
      
      public void withdraw() {
      
@@ -168,17 +171,7 @@ public class Customer extends SystemInterface {
      
      }
      
-     public void viewBalance() {
-     
-     System.out.println("Your balance : " + customer_account.getBalance());
-     
-     }
-     
-     public void viewLastDeposit() {
-     
-     System.out.println("Last deposit amount : " + last_deposit);
-     
-     }*/
+     */
     
     public void setCustomerAccount(Account c_act) {
         
