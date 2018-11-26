@@ -1,5 +1,14 @@
 package project;
 
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Account class for constructor, mutator, and accessor methods
+ */
 
 public class Account {
     //class attributes
@@ -16,28 +25,20 @@ public class Account {
     public Account(String account_number, int PIN, int SSN, double balance) {
         
         //if the inputs are of valid lengths, then set
-        if(account_number.length() == 5) {
-            
+        if(account_number.length() == 5) {    
             setAccount_number(account_number);
-            
         }
         
-        if(String.valueOf(PIN).length() == 4) {
-            
-            setPin(PIN);
-            
+        if(String.valueOf(PIN).length() == 4) {      
+            setPin(PIN);         
         }
         
-        if(String.valueOf(SSN).length() == 5) {
-            
-            setSsn(SSN);
-            
+        if(String.valueOf(SSN).length() == 5) {        
+            setSsn(SSN);         
         }
         
-        if(balance >= 0) {
-            
-            setBalance(balance);
-            
+        if(balance >= 0) {          
+            setBalance(balance);          
         }
     }
     

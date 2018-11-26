@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Customer class for customer menu options
+ */
+
 public class Customer extends SystemInterface {
     
+	//class attributes
     ArrayList<Account> account_list;
     public Account customer_account;
     double last_deposit = 0;
     
-    /*Customer() {
-     
-     System.out.println("\nWelcome to customer banking portal");
-     customerMenu();
-     
-     }*/
-    
+    //customer constructor
     Customer(Account c_act) {
         
         setCustomerAccount(c_act);
@@ -30,10 +35,7 @@ public class Customer extends SystemInterface {
     public void customerMenu() {
         
         boolean flag = true; // determines whether program keeps running
-        
-        //account obj to keep track of the current account
-        
-        
+   
         // SWITCH MENU
         while(flag == true) {
             int choice = -1;
@@ -45,6 +47,7 @@ public class Customer extends SystemInterface {
             try {
                 choice = input.nextInt();
                 
+                //if user enters an invalid choice
                 if(choice > 5 || choice < 0)
                     throw new InputMismatchException();
                 
@@ -185,4 +188,5 @@ public class Customer extends SystemInterface {
         
     }
 }
+
 

@@ -2,9 +2,17 @@ package project;
 
 import java.util.ArrayList;
 
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Account database to hold information of all accounts
+ */
+
 public class AccountDatabase extends ArrayList<Account> {
-    
-    //private static final long serialVersionUID = 1L;
     
     AccountDatabase() {
     	

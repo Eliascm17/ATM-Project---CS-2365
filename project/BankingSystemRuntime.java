@@ -11,28 +11,15 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
-
-/**
- * @author John Goodrich
- *
- * R # 11605245
- *
- *    deposit
- *    withdraw
- *    check balance
- *    transfer
- *
- *    enter account number (3 attempts)
- *    verify pin (3 attempts)
- *
- *    if succesfful,
- *
- *    prompt for action (wd, cb, etc.)
- *    for withdraw, check balance for sufficient funds
- *    for transfer, check source and destination accounts
- *    bank staff can open or close account with PIN, SSN, and zero balance (system creates account number)
- *
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Banking System to run the program. Access to the different menu
+ * if valid authentication
  */
 
 public class BankingSystemRuntime {
@@ -82,7 +69,7 @@ public class BankingSystemRuntime {
                 
                 //if bank staff account entered
                 if(account_number.equals("11111")) {
-                    System.out.println("Bank Staff");
+                    System.out.println("\nBank Staff");
                     
                     BankStaff bs = new BankStaff();
                     //go to bank staff menu
@@ -105,8 +92,6 @@ public class BankingSystemRuntime {
                             
                             System.out.println("\nPin validated");
                             Customer customer = new Customer(a);
-                            //customer.setSystemAccount(a);
-                            //customer.setCustomerAccount(a);
                             
                             //go to customer menu
                             customer.customerMenu();
@@ -203,40 +188,5 @@ public class BankingSystemRuntime {
         Account none = new Account();
         return none;
     }
-    
-    //what does this do??
-//    private class Counter extends TimerTask {
-//        
-//        Account a;
-//        
-//        Counter(Account a) {
-//            this.a = a;
-//        }
-//        
-//        public void run() {
-//            double balance = (a.getBalance() * 1.05);
-//            a.setBalance(balance);
-//            
-//        }
-//    }
-		
-		
+				
 }
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//

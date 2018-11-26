@@ -1,5 +1,16 @@
 package project;
 
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * System Interface class to perform menu options
+ */
+
+
 import java.util.Scanner;
 
 public class SystemInterface extends AccountFunctions {
@@ -41,7 +52,6 @@ public class SystemInterface extends AccountFunctions {
         else{
         	System.out.println("Insufficient Funds");
         }
-        input.close();
         
     }
     
