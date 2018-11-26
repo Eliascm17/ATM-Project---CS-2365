@@ -1,6 +1,7 @@
 package project;
 
 import java.util.Random;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -30,44 +31,66 @@ public class BankStaff extends SystemInterface {
             System.out.println("MAIN MENU\n\n5) Open Account\n6) Close Account \n7) Cancel");
             
             Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
+            try {
+		            int choice = input.nextInt();
+		            
+		            if(choice < 5 || choice > 7)
+		            	throw new InputMismatchException();
+		            
+		            switch(choice) {
+		                    
+		                    // CANCEL
+		                    
+		                case 5:
+		                    
+		                    createAccount();
+		                    break;
+		                    
+		                case 6:
+		                    
+		                    closeAccount();
+		                    break;
+		                    
+		                case 7:
+		                    System.out.println("Thank you.");
+		                    flag = false; // potential error
+		                    break;
+		                    
+		            }
+		            
             
-            switch(choice) {
-                    
-                    // CANCEL
-                    
-                case 5:
-                    
-                    createAccount();
-                    break;
-                    
-                case 6:
-                    
-                    closeAccount();
-                    break;
-                    
-                case 7:
-                    System.out.println("Thank you.");
-                    flag = false; // potential error
-                    break;
-                    
-            }
             
             // PROMPTS USER FOR CONTINUING PROGRAM
             
-            System.out.println("Continue banking? Y/N");
-            String response = input.nextLine();
-            response.toUpperCase();
+		            System.out.println("Continue banking? Y/N");
+		            
+		            Scanner continu = new Scanner(System.in);
+		            String response = continu.nextLine();
+		            response = response.toUpperCase();		            
+	                while(!(response.equals("Y")) && !(response.equals("N"))){
+	                    System.out.println("\nPlease enter Y or N\n");
+	                    response = continu.next();
+	                    response = response.toUpperCase();
+	                	}
+		            if(response.equals("N")) {
+		
+							System.out.println("Thank you for banking with us!");
+							flag = false;
+							System.exit(0);
+		            }
+		            if(response.equals("Y")) {
+		        		bankStaffMenu();
+	            }
+		
+		        }
+		        catch(InputMismatchException n) {
+		            System.out.println("\nERROR. Please enter a number 0 - 5");
+		
+		        }
             
-            //insert CATCH FOR ANYTHING OTHER THAN Y OR N
-            if(response.equals("Y")) {
-                bankStaffMenu();
-            }
-            if(response.equals("N") ) {
-                System.out.println("\nSystem shutting down");
-                System.exit(0);
-            }
-        }
+
+        	}
+          
     }
     
     // CREATES NEW ACCOUNT
@@ -94,7 +117,8 @@ public class BankStaff extends SystemInterface {
             case 0:
             	
             	account_number = accountNumberGenerator(1);
-                CheckingAccount checking_account = new CheckingAccount(account_number,pin,ssn,0.0);
+            	String numberAsString1 = String.valueOf(account_number);
+                CheckingAccount checking_account = new CheckingAccount(numberAsString1,pin,ssn,0.0);
                 addAccount(checking_account);
                 break;
             	
@@ -102,7 +126,8 @@ public class BankStaff extends SystemInterface {
                 // CREATE SAVINGS ACCOUNT
             case 1:
             	account_number = accountNumberGenerator(0);
-            	SavingsAccount savings_account = new SavingsAccount(account_number,pin,ssn,0.0);
+            	String numberAsString2 = String.valueOf(account_number);
+            	SavingsAccount savings_account = new SavingsAccount(numberAsString2,pin,ssn,0.0);
                 addAccount(savings_account);
                 break;
                 
@@ -156,7 +181,7 @@ public class BankStaff extends SystemInterface {
         System.out.println("Enter account number to close: ");
         
         Scanner input = new Scanner(System.in);
-        int account_number = input.nextInt();
+        String account_number = input.nextLine();
         
         deleteAccount(account_number);
         

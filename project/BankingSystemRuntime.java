@@ -59,7 +59,7 @@ public class BankingSystemRuntime {
     
     	
         boolean flag = true;
-        int account_number = 0;
+        String account_number;
         int enter_count = 3, pin_count = 3;        //counter for attempts
         
         while(flag == true) {
@@ -68,19 +68,20 @@ public class BankingSystemRuntime {
             
             System.out.println("Enter account number : ");
             try {
-                account_number = input.nextInt();
+                account_number = input.nextLine();
                 
                 //while the account number entered is invalid
+         
                 while((checkInput(account_number,5) == false) || checkAn(account_number) == false) {
                     
                     System.out.println("\nINVALID Account number. Please try again.");
                     enter_count = attemptsLeft(enter_count);
                     
-                    account_number = input.nextInt();
+                    account_number = input.nextLine();
                 }
                 
                 //if bank staff account entered
-                if(account_number == 11111) {
+                if(account_number.equals("11111")) {
                     System.out.println("Bank Staff");
                     
                     BankStaff bs = new BankStaff();
@@ -94,12 +95,13 @@ public class BankingSystemRuntime {
                 System.out.println("\nEnter Pin: ");
                 
                 int pin = input.nextInt();
-                if(checkInput(pin,4) == true) {
+                String AsaString = String.valueOf(pin);
+                if(checkInput(AsaString,4) == true) {
                     
                     //validate the pin entered
                     for(Account a : database) {
                         
-                        if(pin == a.getPin() && account_number == a.getAccount_number()) {
+                        if(pin == a.getPin() && account_number.equals(a.getAccount_number())) {
                             
                             System.out.println("\nPin validated");
                             Customer customer = new Customer(a);
@@ -128,6 +130,7 @@ public class BankingSystemRuntime {
                 enter_count = attemptsLeft(enter_count);
                 
             }
+            input.close();
             
             /*System.out.println("Shut down ATM? Y/N");
              String response = input.nextLine();
@@ -157,12 +160,12 @@ public class BankingSystemRuntime {
         return counter;
     }
     
-    public static boolean checkAn(int aNum) {
+    public static boolean checkAn(String aNum) {
         
         //for the accounts in the set
         for(Account a : database) {
             //check if any account number matches the entered account number
-            if(a.getAccount_number() == aNum)
+            if(a.getAccount_number().equals(aNum))
                 return true;
         }
         
@@ -172,9 +175,9 @@ public class BankingSystemRuntime {
     
     // CHECK INPUT LENGTHS - checks the required lengths of inputs
     
-    public static boolean checkInput(int input, int length) {
+    public static boolean checkInput(String input, int length) {
         
-        if(String.valueOf(input).length() == length) {
+        if(input.length() == length) {
             //user input checks out
             return true;
         }
@@ -191,7 +194,7 @@ public class BankingSystemRuntime {
     }
     
     //returns the account object associated with account number
-    static Account returnAccount(int aNum) {
+    static Account returnAccount(String aNum) {
         for(Account a : database) {
             //check if any account number matches the entered account number
             if(a.getAccount_number() == aNum)

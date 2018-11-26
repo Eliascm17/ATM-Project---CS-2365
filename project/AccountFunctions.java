@@ -6,7 +6,7 @@ public abstract class AccountFunctions {
     
     AccountDatabase account_list = new AccountDatabase();
     
-    public Account searchAccount(int account_number) {
+    public Account searchAccount(String account_number) {
         
         for(Account a : account_list) {
             
@@ -30,7 +30,7 @@ public abstract class AccountFunctions {
         
     }
     
-    public void deleteAccount(int account_number) {
+    public void deleteAccount(String account_number) {
         
         Account a = searchAccount(account_number);
         System.out.println("Closing " + a.getAccount_number());

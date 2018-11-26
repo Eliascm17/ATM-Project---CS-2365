@@ -3,7 +3,7 @@ package project;
 
 public class Account {
     //class attributes
-    protected int account_number; // 5 digits, 4 digits, 9 digits;
+    protected String account_number; // 5 digits, 4 digits, 9 digits;
     protected int pin, ssn;
     protected double balance = 0;
     private boolean savings_account = false;
@@ -13,10 +13,10 @@ public class Account {
     }
     
     //account constructor
-    public Account(int account_number, int PIN, int SSN, double balance) {
+    public Account(String account_number, int PIN, int SSN, double balance) {
         
         //if the inputs are of valid lengths, then set
-        if(String.valueOf(account_number).length() == 5) {
+        if(account_number.length() == 5) {
             
             setAccount_number(account_number);
             
@@ -50,15 +50,16 @@ public class Account {
         this.ssn = ssn;
     }
     
-    public int getAccount_number() {
+    public String getAccount_number() {
         return account_number;
     }
     
-    public void setAccount_number(int account_number) {
+    public void setAccount_number(String account_number) {
         this.account_number = account_number;
     }
     
     public int getPin() {
+ 
         return pin;
     }
     

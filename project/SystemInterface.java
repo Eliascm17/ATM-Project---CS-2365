@@ -40,7 +40,7 @@ public class SystemInterface extends AccountFunctions {
     public void transfer() {
         
         System.out.println("Enter destination account");
-        int dest= input.nextInt();
+        String dest= input.nextLine();
         
         Account destination_account = searchAccount(dest);
         
