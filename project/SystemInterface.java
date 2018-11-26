@@ -61,14 +61,16 @@ public class SystemInterface extends AccountFunctions {
     }
     
     public void viewBalance(Account a) {
-        
-        System.out.println("Your balance : " + a.getBalance());
+    	
+    	String numberAsString = String.format ("%,.2f", a.getBalance());
+        System.out.println("Your balance : " + numberAsString);
         
     }
     
     public void viewLastDeposit() {
         
-        System.out.println("Last deposit amount : " + last_deposit);
+    	String numberAsString = String.format ("%,.2f", last_deposit);
+        System.out.println("Last deposit amount : " + numberAsString);
         
     }
     

@@ -41,9 +41,23 @@ public class BankingSystemRuntime {
     
     public static void main(String[] args) {
         
-        /*Timer timer = new Timer();*/
-        // timer.schedult(task);
         //AccountDatabase database = new AccountDatabase();
+        //TIMER THAT EXECUTES EVERY 60 SECONDS
+        int Minute = 1; 
+		Timer timer = new Timer(); 
+		    timer.schedule(new TimerTask() {
+		        @Override
+		        public void run() { 
+		        	for(Account a : database)
+		        	{
+		        		double balance = (a.getBalance() * 1.05); 
+		        		a.setBalance(balance);
+		        	}
+		        }
+		     }, 0, 1000 * 60 * Minute);
+		 //
+    
+    	
         boolean flag = true;
         int account_number = 0;
         int enter_count = 3, pin_count = 3;        //counter for attempts
@@ -129,7 +143,7 @@ public class BankingSystemRuntime {
              
              }*/
         }
-        
+ 
     }
     
     public static int attemptsLeft(int counter) {
@@ -188,18 +202,38 @@ public class BankingSystemRuntime {
     }
     
     //what does this do??
-    private class Counter extends TimerTask {
-        
-        Account a;
-        
-        Counter(Account a) {
-            this.a = a;
-        }
-        
-        public void run() {
-            double balance = (a.getBalance() + (a.getBalance()));
-            a.setBalance(balance);
-            
-        }
-    }
+//    private class Counter extends TimerTask {
+//        
+//        Account a;
+//        
+//        Counter(Account a) {
+//            this.a = a;
+//        }
+//        
+//        public void run() {
+//            double balance = (a.getBalance() * 1.05);
+//            a.setBalance(balance);
+//            
+//        }
+//    }
+		
+		
 }
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
