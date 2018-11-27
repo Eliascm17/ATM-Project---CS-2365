@@ -1,5 +1,15 @@
 package project;
 
+/* 
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Savings Account class with Account class as superclass
+ */
+
 public class SavingsAccount extends Account {
     String type = "savings";
     
