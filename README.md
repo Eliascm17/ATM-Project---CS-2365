@@ -6,7 +6,8 @@ CS 2365 Fall 2018 Project
  * 		Elias Moreno
  * 		Xin Huang
  * 		John Goodrich
-
+ *
+ 
 This is a simplified banking system where a customer do one of the following options if applicable:
 
 	1) Deposit

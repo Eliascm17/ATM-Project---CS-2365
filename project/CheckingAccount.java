@@ -7,7 +7,7 @@ package project;
  * 		Xin Huang
  * 		John Goodrich
  * 
- * Checking Account class with Account class as super
+ * Checking Account class with Account class as superclass
  */
 
 class CheckingAccount extends Account{
