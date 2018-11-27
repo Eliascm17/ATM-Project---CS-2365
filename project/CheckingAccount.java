@@ -1,6 +1,6 @@
 package project;
 
-/*
+/* CS 2365
  * Team L:
  * 		Leidy Ward
  * 		Elias Moreno
