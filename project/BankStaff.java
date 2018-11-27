@@ -32,7 +32,7 @@ public class BankStaff extends SystemInterface {
         // SWITCH MENU
         while(flag == true) {
             
-            System.out.println("MAIN MENU\n\n5) Open Account\n6) Close Account \n7) Cancel");
+            System.out.println("\nMAIN MENU\n\n5) Open Account\n6) Close Account \n7) Cancel");
             
             Scanner input = new Scanner(System.in);
             try {
@@ -56,19 +56,17 @@ public class BankStaff extends SystemInterface {
 		                    break;
 		                    
 		                case 7:
-		                    System.out.println("Thank you.");
+		                    System.out.println("\nThank you.");
 		                    flag = false; // potential error
 		                    break;
 		                    
 		            }
-//		            input.close();
             
 		            // PROMPTS USER FOR CONTINUING PROGRAM
 		            Scanner cont = new Scanner(System.in);
 		            System.out.println("Continue banking? Y/N");
 		            
 		            String response = cont.nextLine();
-		            System.out.println(response);
 		            response = response.toUpperCase();	
 		            
 	                while(!(response.equals("Y")) && !(response.equals("N"))){
@@ -128,7 +126,7 @@ public class BankStaff extends SystemInterface {
   			ssnStr = String.valueOf(ssn);
   		}
         
-        System.out.println("\nChecking or Savings?\\n0 for Checking\\n1 for Savings");
+        System.out.println("\nChecking or Savings?\n0 for Checking\n1 for Savings");
         choice = input.nextInt();
         
         // CHOICE FOR CREATING CHECKING ACCOUNT or SAVINGS ACCOUNT
@@ -154,7 +152,7 @@ public class BankStaff extends SystemInterface {
                 
         }
         
-        input.close();
+        
     }
     
     // GENERATES ACCOUNT NUMBER
@@ -186,7 +184,7 @@ public class BankStaff extends SystemInterface {
         }
         
         //int account_number = Integer.parseInt(str.toString());
-        System.out.println("System generated Account Number: " + str);
+        System.out.println("\nSystem generated Account Number: " + str);
         
         return str.toString();
         
@@ -195,14 +193,14 @@ public class BankStaff extends SystemInterface {
     // CLOSE ACCOUNT
     public void closeAccount() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Close Account");
+        System.out.println("\nClose Account");
         viewAccountDatabase();
-        System.out.println("Enter account number to close: ");
+        System.out.println("\nEnter account number to close: ");
         //This gets rid of the \n blank space to not confuse our scanner
 //        in.nextLine();
         String account_number = in.nextLine();
         
-        System.out.println("Your account number is "+ account_number);
+        System.out.println("\nYour account number is "+ account_number);
         deleteAccount(account_number);
     }
     

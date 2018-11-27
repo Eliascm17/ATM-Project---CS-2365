@@ -66,15 +66,21 @@ public class SystemInterface extends AccountFunctions {
         
         Account destination_account = searchAccount(dest);
         
-        while(destination_account==null){transfer();}
+        while(destination_account==null){
+        	
+        	System.out.println("Enter destination account");
+            dest= input.nextLine();
+            destination_account = searchAccount(dest);
+            
+        }
         
-        System.out.println("Enter transfer amount : ");
+        System.out.println("\nEnter transfer amount : ");
         double transfer= input.nextDouble();
         
         double origin_balance = account.getBalance();
         double destination_balance = destination_account.getBalance();
         
-        if(origin_balance>=transfer){
+        if(origin_balance>=transfer && transfer>0){
         
 	        double new_origin_balance = (origin_balance - transfer);
 	        double new_destination_balance = (destination_balance + transfer);
@@ -85,14 +91,16 @@ public class SystemInterface extends AccountFunctions {
 	        viewBalance(account);
 	        System.out.println("Destination account balance : " + destination_account.getBalance());
         }
-	       
-        input.close();
+        else {
+        	System.out.println("Insufficient Funds or invalid input");
+        }
+	      
     }
     
     public void viewBalance(Account a) {
     	
     	String numberAsString = String.format ("%,.2f", a.getBalance());
-        System.out.println("Your balance : " + numberAsString);
+        System.out.println("\nYour balance : " + numberAsString);
         
     }
     

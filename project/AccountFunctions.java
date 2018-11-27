@@ -25,7 +25,7 @@ public abstract class AccountFunctions {
             
             if(account_number.equals(a.getAccount_number())) {
                 //return account if found
-                System.out.println("Found destination account");
+                System.out.println("\nFound destination account");
                 return a;
                 
             }
@@ -48,7 +48,7 @@ public abstract class AccountFunctions {
     public void deleteAccount(String account_number) {
         
         Account a = searchAccount(account_number);
-        System.out.println("Closing " + a.getAccount_number());
+        System.out.println("Closing " + a.getAccount_number() + "\n");
         account_list.remove(a);
         
     }

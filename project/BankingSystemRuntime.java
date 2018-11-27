@@ -109,7 +109,7 @@ public class BankingSystemRuntime {
 		                    
 		                }
 		                else {
-		                    System.out.println("Pin not long enough. Please try again.");
+		                    System.out.println("\nPin not of a valid length. Please try again.");
 		                    pin_count = attemptsLeft(pin_count);
 		                }
             	}
