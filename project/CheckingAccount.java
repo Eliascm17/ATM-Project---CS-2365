@@ -1,6 +1,15 @@
 package project;
 
-//checking account class
+/*
+ * Team L:
+ * 		Leidy Ward
+ * 		Elias Moreno
+ * 		Xin Huang
+ * 		John Goodrich
+ * 
+ * Checking Account class with Account class as super
+ */
+
 class CheckingAccount extends Account{
     String type = "checking";
     

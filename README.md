@@ -18,5 +18,5 @@ This is a simplified banking system where a customer do one of the following opt
 
 There is also a Bank Staff Menu that can:
 
-Open an account
-Close an account
+-Open an account
+-Close an account
