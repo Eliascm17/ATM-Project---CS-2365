@@ -30,6 +30,7 @@ public class BankingSystemRuntime {
         
         //AccountDatabase database = new AccountDatabase();
         //TIMER THAT EXECUTES EVERY 60 SECONDS
+    	int AccountNum = 6; //num of accounts
         int Minute = 1; 
 		Timer timer = new Timer(); 
 		    timer.schedule(new TimerTask() {
@@ -62,9 +63,10 @@ public class BankingSystemRuntime {
                 while((checkInput(account_number,5) == false) || checkAn(account_number) == false) {
                     
                     System.out.println("\nINVALID Account number. Please try again.");
-                    enter_count = attemptsLeft(enter_count);
-                    
+                    enter_count = attemptsLeft(enter_count);       
+              
                     account_number = input.nextLine();
+                    
                 }
                 
                 //if bank staff account entered
@@ -79,57 +81,46 @@ public class BankingSystemRuntime {
                 
                 // CUSTOMER ENTERS PIN
                 // Needs a separate method
-                System.out.println("\nEnter Pin: ");
-                
-                int pin = input.nextInt();
-                String AsaString = String.valueOf(pin);
-                if(checkInput(AsaString,4) == true) {
-                    
-                    //validate the pin entered
-                    for(Account a : database) {
-                        
-                        if(pin == a.getPin() && account_number.equals(a.getAccount_number())) {
-                            
-                            System.out.println("\nPin validated");
-                            Customer customer = new Customer(a);
-                            
-                            //go to customer menu
-                            customer.customerMenu();
-                        }
-                        
-                        else    {
-                            System.out.println("Invalid pin. Please try again.");
-                            pin_count = attemptsLeft(pin_count);
-                        }
-                        continue;
-                        
-                    }
-                }
-                else {
-                    System.out.println("Invalid pin. Please try again.");
-                    pin_count = attemptsLeft(pin_count);
-                }
+                boolean pinFlag = true;
+                while(pinFlag) {
+		                System.out.println("\nEnter Pin: "); 
+		                int pin = input.nextInt();
+		                String AsaString = String.valueOf(pin);
+		      
+		                inner:
+		                if(checkInput(AsaString,4) == true) {
+		                        
+		                        if(valPin(pin,account_number)) {
+		                        	
+		                            System.out.println("\nPin validated");
+		                            Customer customer = new Customer(returnA(pin,account_number));
+		                            //go to customer menu
+		                            customer.customerMenu();
+		                            
+		                        }
+		                        
+		                        else{
+		                            System.out.println("Invalid pin. Please try again.");
+		                            pin_count = attemptsLeft(pin_count);
+		                            break inner;
+		                        }
+		                        //continue;
+		                        
+		                    
+		                }
+		                else {
+		                    System.out.println("Pin not long enough. Please try again.");
+		                    pin_count = attemptsLeft(pin_count);
+		                }
+            	}
             }
+            
             catch(InputMismatchException n) {
                 System.out.println("\nERROR. Only numbers allowed. Please try again.\n");
                 enter_count = attemptsLeft(enter_count);
                 
             }
-            input.close();
             
-            /*System.out.println("Shut down ATM? Y/N");
-             String response = input.nextLine();
-             response.toUpperCase();
-             
-             //insert CATCH FOR ANYTHING OTHER THAN Y OR N
-             if(response.equals("Y")) {
-             System.out.println("System shutting down");
-             System.exit(0);
-             }
-             if(response.equals("N") ) {
-             //return to menu
-             
-             }*/
         }
  
     }
@@ -143,6 +134,26 @@ public class BankingSystemRuntime {
             System.exit(0);
         }
         return counter;
+    }
+    
+    public static boolean valPin(int pin, String Accountnum) {
+    	
+    	for(Account a: database) {
+    		if(pin == a.getPin() && Accountnum.equals(a.getAccount_number())) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    public static Account returnA(int pin, String Accountnum) {
+    	
+    	for(Account a: database) {
+    		if(pin == a.getPin() && Accountnum.equals(a.getAccount_number())) {
+    			return a;
+    		}
+    	}
+    	return null;
+
     }
     
     public static boolean checkAn(String aNum) {
