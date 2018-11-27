@@ -1,3 +1,4 @@
+
 package project;
 
 import java.util.Random;
@@ -36,7 +37,7 @@ public class BankStaff extends SystemInterface {
             Scanner input = new Scanner(System.in);
             try {
 		            int choice = input.nextInt();
-		            
+		            input.nextLine();
 		            if(choice < 5 || choice > 7)
 		            	throw new InputMismatchException();
 		            
@@ -60,7 +61,7 @@ public class BankStaff extends SystemInterface {
 		                    break;
 		                    
 		            }
-		            input.close();
+//		            input.close();
             
 		            // PROMPTS USER FOR CONTINUING PROGRAM
 		            Scanner cont = new Scanner(System.in);
@@ -82,12 +83,12 @@ public class BankStaff extends SystemInterface {
 							System.exit(0);
 		            }
 		            else if(response.equals("Y")) 
-		        			bankStaffMenu();  
+                            bankStaffMenu();  
 		
 		            cont.close();
 		        }
 		        catch(InputMismatchException n) {
-		            System.out.println("\nERROR. Please enter a number 0 - 5");
+		            System.out.println("\nERROR. Please enter a number 5 - 7");
 		
 		        }
             
@@ -193,17 +194,16 @@ public class BankStaff extends SystemInterface {
     
     // CLOSE ACCOUNT
     public void closeAccount() {
-        
+        Scanner in = new Scanner(System.in);
         System.out.println("Close Account");
         viewAccountDatabase();
         System.out.println("Enter account number to close: ");
+        //This gets rid of the \n blank space to not confuse our scanner
+//        in.nextLine();
+        String account_number = in.nextLine();
         
-        Scanner input = new Scanner(System.in);
-        String account_number = input.nextLine();
-        
+        System.out.println("Your account number is "+ account_number);
         deleteAccount(account_number);
-        
-        input.close();
     }
     
     public static boolean checkInput(String input, int length) {
@@ -216,4 +216,3 @@ public class BankStaff extends SystemInterface {
         
     }
 }
-

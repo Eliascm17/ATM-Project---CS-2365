@@ -23,7 +23,7 @@ public abstract class AccountFunctions {
     		//loop through database
         for(Account a : account_list) {
             
-            if(account_number == a.getAccount_number()) {
+            if(account_number.equals(a.getAccount_number())) {
                 //return account if found
                 System.out.println("Found destination account");
                 return a;
